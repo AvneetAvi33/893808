@@ -1,0 +1,121 @@
+@import "tailwindcss";
+@import "./styles/tokens.css";
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-ink);
+  color: var(--color-cream);
+  font-family: var(--font-ui);
+  font-size: calc(1rem * var(--ui-scale));
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior: none;
+  /* The stage is always exactly the viewport; nothing scrolls the page. */
+  overflow: hidden;
+}
+
+/* Hidden cursor during idle screensaver mode. */
+body[data-cursor="hidden"],
+body[data-cursor="hidden"] * {
+  cursor: none !important;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--accent) 40%, transparent);
+}
+
+/* ---------------------------------------------------------------------------
+   Focus: quiet for the mouse, unmissable for a keyboard or a TV remote
+--------------------------------------------------------------------------- */
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 0.75rem;
+}
+
+:root[data-tv="on"] :focus-visible {
+  outline-width: 3px;
+  outline-offset: 6px;
+  box-shadow:
+    0 0 0 6px color-mix(in oklab, var(--accent) 22%, transparent),
+    0 12px 40px -8px color-mix(in oklab, var(--accent) 45%, transparent);
+}
+
+/* ---------------------------------------------------------------------------
+   Utilities
+--------------------------------------------------------------------------- */
+
+@utility glass {
+  background: color-mix(in oklab, var(--color-ink) 62%, transparent);
+  backdrop-filter: blur(22px) saturate(1.25);
+  -webkit-backdrop-filter: blur(22px) saturate(1.25);
+  border: 1px solid rgb(255 255 255 / 0.1);
+  box-shadow:
+    0 1px 0 0 rgb(255 255 255 / 0.06) inset,
+    0 24px 60px -22px rgb(0 0 0 / 0.85);
+}
+
+/* A scrim behind text that sits over bright video, so contrast survives a
+   snow covered mountain just as well as deep space. */
+@utility scrim {
+  text-shadow:
+    0 1px 2px rgb(0 0 0 / 0.55),
+    0 4px 24px rgb(0 0 0 / 0.45);
+}
+
+@utility font-deva {
+  font-family: var(--font-deva);
+}
+
+@utility tap-safe {
+  /* Comfortable thumb targets on phones, generous ones on a TV. */
+  min-width: calc(2.75rem * var(--ui-scale));
+  min-height: calc(2.75rem * var(--ui-scale));
+}
+
+/* Framer Motion handles reduced motion for animated values; this covers the
+   handful of places where plain CSS transitions do the work. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 200ms !important;
+  }
+}
+
+/* Hide the native range thumb; the seek and volume bars are drawn by hand and
+   keep the input only as an accessible, keyboard operable surface. */
+input[type="range"].bare {
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+input[type="range"].bare::-webkit-slider-thumb {
+  appearance: none;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+input[type="range"].bare::-moz-range-thumb {
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  border: none;
+}

@@ -14,12 +14,32 @@ and keeps the display awake while a journey is playing.
 
 ```bash
 cd zen-journeys
-npm install
-npm run dev        # development, with hot reload
-npm run build      # type check, then bundle to dist/
-npm run preview    # serve the built bundle
-npm run icons      # regenerate the app icons from scripts/make-icons.mjs
+./run.sh           # dev server, on the right version of Node
 ```
+
+`run.sh` picks up nvm if you have it and switches to the version in `.nvmrc`,
+installs dependencies when the lockfile has moved on, and starts Vite. Without
+nvm it uses the Node already on your PATH, and tells you plainly if that is too
+old rather than failing somewhere inside the build.
+
+```bash
+./run.sh --host    # expose the dev server on the network, for a phone or a TV
+./run.sh build     # type check, then bundle to dist/
+./run.sh preview   # serve the built bundle
+./run.sh typecheck # type check only
+./run.sh icons     # regenerate the app icons from scripts/make-icons.mjs
+```
+
+Or drive npm directly, if you manage Node yourself:
+
+```bash
+npm install
+npm run dev
+```
+
+Either way this needs **Node 20.19+ or 22+**, which is Vite 8's floor.
+On Windows, `run.sh` needs Git Bash or WSL; nvm-windows users can run
+`nvm use 22` and then use the npm commands above.
 
 ## What ships, and what does not
 

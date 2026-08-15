@@ -1,0 +1,58 @@
+/*
+  Zen Journeys design tokens.
+
+  Everything visual hangs off these: a near black ground so video glows, warm
+  off white text, one soft accent per scene, and slow easing curves. The accent
+  pair is a runtime variable (--accent / --accent-soft) that the active scene
+  writes, so a scene change re-tints the whole interface with one transition.
+*/
+
+@theme {
+  /* Ground and text -------------------------------------------------- */
+  --color-ink: #08070b; /* deep near black page ground */
+  --color-ink-soft: #12111a; /* raised ground, drawers */
+  --color-veil: #050407; /* the dark veil used between scenes */
+  --color-cream: #f4efe6; /* warm off white, primary text */
+  --color-cream-dim: #cdc6ba; /* secondary text */
+  --color-cream-faint: #8e887f; /* tertiary text, timestamps */
+
+  /* Scene accents ----------------------------------------------------- */
+  --color-galaxy: #8b8cf0;
+  --color-galaxy-soft: #c9a8ff;
+  --color-bus: #f0a55e;
+  --color-bus-soft: #d97a52;
+  --color-car: #5fb3ad;
+  --color-car-soft: #f08a4b;
+  --color-train: #a3b58c;
+  --color-train-soft: #c9a97e;
+
+  /* Typography -------------------------------------------------------- */
+  --font-display: "Fraunces", "Instrument Serif", "Iowan Old Style",
+    "Palatino Linotype", Palatino, Georgia, serif;
+  --font-ui: "Inter", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, sans-serif;
+  --font-deva: "Mukta", "Noto Sans Devanagari", "Nirmala UI", "Kohinoor Devanagari",
+    "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Motion ------------------------------------------------------------ */
+  /* Slow out, no overshoot: nothing in this app is allowed to snap. */
+  --ease-zen: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-drift: cubic-bezier(0.33, 0, 0.12, 1);
+  --ease-veil: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Glass -------------------------------------------------------------- */
+  --radius-glass: 1.25rem;
+}
+
+:root {
+  /* Overwritten per scene; these are the neutral entry-screen values. */
+  --accent: #8b8cf0;
+  --accent-soft: #c9a8ff;
+
+  /* Scaled up wholesale in TV mode so one number drives the ten foot UI. */
+  --ui-scale: 1;
+}
+
+:root[data-tv="on"] {
+  --ui-scale: 1.45;
+}

@@ -1,0 +1,193 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-deva: "Baloo 2", "Hanken Grotesk", ui-sans-serif, sans-serif;
+
+  --color-ink: #221a12;
+  --color-ink-soft: #6b5b48;
+  --color-marigold: #f2a007;
+  --color-marigold-deep: #d97a06;
+  --color-haze: #ffd9a8;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  overflow: hidden;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+  /* Backdrop that shows before the WebGL sky dome paints. */
+  background: linear-gradient(
+    to bottom,
+    #6fb3e8 0%,
+    #9fd0ef 32%,
+    #d9e6ea 58%,
+    #ffd7a4 82%,
+    #ffc07d 100%
+  );
+}
+
+/* The whole app is pinned to the viewport so it can never collapse to zero
+   height inside an embed or an iframe. */
+.anant-root {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+  touch-action: none;
+}
+
+/* Frosted premium card used across the HUD. */
+.card {
+  background: color-mix(in srgb, #fffaf1 76%, transparent);
+  backdrop-filter: blur(18px) saturate(1.35);
+  -webkit-backdrop-filter: blur(18px) saturate(1.35);
+  border: 1px solid color-mix(in srgb, #ffffff 65%, transparent);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.75) inset,
+    0 10px 30px -12px rgba(60, 38, 12, 0.42),
+    0 2px 8px -4px rgba(60, 38, 12, 0.25);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  transition:
+    transform 140ms cubic-bezier(0.2, 0.8, 0.3, 1),
+    background-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease;
+  user-select: none;
+  cursor: pointer;
+}
+.btn:active {
+  transform: scale(0.94);
+}
+
+/* Range input, restyled to match the warm HUD. */
+input[type="range"].anant-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+input[type="range"].anant-slider::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--color-marigold) 0%,
+    var(--color-marigold) var(--fill, 50%),
+    rgba(94, 71, 40, 0.22) var(--fill, 50%),
+    rgba(94, 71, 40, 0.22) 100%
+  );
+}
+input[type="range"].anant-slider::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(94, 71, 40, 0.22);
+}
+input[type="range"].anant-slider::-moz-range-progress {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--color-marigold);
+}
+input[type="range"].anant-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  margin-top: -6px;
+  border-radius: 999px;
+  background: #fffaf1;
+  border: 2px solid var(--color-marigold-deep);
+  box-shadow: 0 2px 6px rgba(80, 48, 8, 0.35);
+}
+input[type="range"].anant-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--color-marigold-deep);
+  border-radius: 999px;
+  background: #fffaf1;
+  box-shadow: 0 2px 6px rgba(80, 48, 8, 0.35);
+}
+
+/* Entrance motion, disabled when the user asks for reduced motion. */
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.06);
+  }
+}
+.rise {
+  animation: riseIn 720ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.fade {
+  animation: fadeIn 900ms ease both;
+}
+.pulse {
+  animation: glowPulse 3.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .fade,
+  .pulse {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .btn {
+    transition: none;
+  }
+}
+
+/* Scrollbar inside the track list. */
+.thin-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.thin-scroll::-webkit-scrollbar-thumb {
+  background: rgba(120, 88, 40, 0.3);
+  border-radius: 999px;
+}

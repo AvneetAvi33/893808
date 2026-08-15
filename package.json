@@ -1,0 +1,38 @@
+{
+  "name": "anant",
+  "version": "1.0.0",
+  "description": "Anant \u2014 an endless low poly drive across India, in one self contained HTML file.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AvneetAvi33/893808.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AvneetAvi33/893808/issues"
+  },
+  "homepage": "https://github.com/AvneetAvi33/893808#readme",
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "three": "^0.185.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@types/three": "^0.185.4",
+    "@vitejs/plugin-react": "^6.0.5",
+    "tailwindcss": "^4.3.3",
+    "terser": "^5.50.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.1",
+    "vite-plugin-singlefile": "^2.3.3"
+  },
+  "private": true,
+  "type": "module"
+}
